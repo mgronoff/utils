@@ -1,0 +1,28 @@
+From 9cdb39d6824ea9082b556fe54d8eb5b405af238e Mon Sep 17 00:00:00 2001
+From: Samuli Piippo <samuli.piippo@qt.io>
+Date: Wed, 18 May 2016 13:18:28 +0300
+Subject: [PATCH] qtbase: use correct path for QT_HOST_BINS
+
+External host bins are used during build, while host bins refer to
+the installation location.
+Resolves QA Issue: Qt5Core.pc failed sanity test (tmpdir) in path.
+---
+ recipes-qt/qt5/qtbase_git.bb | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
+index 1f98eec..1c29c5d 100644
+--- a/recipes-qt/qt5/qtbase_git.bb
++++ b/recipes-qt/qt5/qtbase_git.bb
+@@ -134,8 +134,6 @@ QT_CONFIG_FLAGS += " \
+     ${PACKAGECONFIG_CONFARGS} \
+ "
+ 
+-OE_QMAKE_PATH_HOST_BINS = "${OE_QMAKE_PATH_EXTERNAL_HOST_BINS}"
+-
+ generate_qt_config_file_effective_paths() {
+     cat >> ${OE_QMAKE_QTCONF_PATH} <<EOF
+ [EffectivePaths]
+-- 
+1.9.1
+
